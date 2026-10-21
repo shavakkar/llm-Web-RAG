@@ -2,11 +2,11 @@ from typing import Optional, List, Dict, Any
 from pydantic import BaseModel, Field
 
 class ConfigUpdateRequest(BaseModel):
-    provider: str = Field(..., description="'local' or 'ollama'")
-    selected_embed_model: str
-    selected_llm_model: str
-    chunk_size: Optional[int] = 300
-    chunk_overlap: Optional[int] = 40
+    provider: Optional[str] = None
+    selected_embed_model: Optional[str] = None
+    selected_llm_model: Optional[str] = None
+    chunk_size: Optional[int] = None
+    chunk_overlap: Optional[int] = None
 
 class IngestRequest(BaseModel):
     docs_dir: Optional[str] = "./docs"

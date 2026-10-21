@@ -45,12 +45,15 @@ def update_config(payload: ConfigUpdateRequest, session: Session = Depends(get_s
     if not config:
         raise HTTPException(status_code=404, detail="Configuration not found.")
 
-    config.provider = payload.provider.lower()
-    config.selected_embed_model = payload.selected_embed_model
-    config.selected_llm_model = payload.selected_llm_model
-    if payload.chunk_size:
+    if payload.provider is not None:
+        config.provider = payload.provider
+    if payload.selected_embed_model is not None:
+        config.selected_embed_model = payload.selected_embed_model
+    if payload.selected_llm_model is not None:
+        config.selected_llm_model = payload.selected_llm_model
+    if payload.chunk_size is not None:
         config.chunk_size = payload.chunk_size
-    if payload.chunk_overlap:
+    if payload.chunk_overlap is not None:
         config.chunk_overlap = payload.chunk_overlap
 
     session.add(config)
